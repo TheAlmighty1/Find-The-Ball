@@ -1,10 +1,6 @@
 from time import sleep
-
-import os
-import pygame
-import sys
+import os, pygame, sys
 from pygame.locals import *
-
 from movecups import movetheballs
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -73,14 +69,14 @@ def clicking(self):
         self.surf = MouseSprite
 
 
-def reveal(self):
+def reveal():
     mouse_pressed2 = pygame.mouse.get_pressed()
     hits = pygame.sprite.spritecollide(Player, Cups, False)
     if hits and mouse_pressed2[0]:
         pygame.sprite.spritecollide(Player, Cups, True)
 
 
-def Start():
+def Start_Function():
     target_y = HEIGHT // 2
     current_y = HEIGHT // 4
     speed = 0.5
@@ -155,7 +151,7 @@ while True:
                 pygame.quit()
                 sys.exit()
             if event.key == pygame.K_SPACE and not started:
-                Start()
+                Start_Function()
                 all_sprites.remove(BallSprite)
                 sleep(0.5)
                 for n in range(0, 4):
@@ -181,7 +177,7 @@ while True:
         if not Won:
             clicking(Player)
             Win()
-            reveal(Player)
+            reveal()
         if Won:
             DisplaySurface.blit(text, TextRect)
         elif Won == 'NO':
